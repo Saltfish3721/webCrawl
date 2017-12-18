@@ -4,11 +4,9 @@ import time
 def load_(url):
     driver = webdriver.Chrome(executable_path='/Users/apple/Downloads/chromedriver')
     driver.get(url)
-    #button_ = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "body > div > div.web-content > div > div > div.articleFeedDetailPageContent > div.articleFeedDetailPageMainArea > div.articleFeedComment-lastestBox > div.articleFeedCommentList > ul > li.toCheckMoreComment > div")))
     time.sleep(10)
 
     moreComments = driver.find_element_by_class_name('toCheckMoreComment')
-    #moreComments.click()
     while moreComments!= None:
         moreComments.click()
         time.sleep(3)
@@ -16,12 +14,12 @@ def load_(url):
             moreComments = driver.find_element_by_class_name('toCheckMoreComment')
         except:
             moreComments=None
+            
     time.sleep(1)
     elem = driver.find_element_by_class_name('checkMoreReplyComment')
     while elem !=None:
         elem.click()
         time.sleep(0.5)
-
         try:
             elem= driver.find_element_by_class_name('checkMoreReplyComment')
         except:
@@ -35,5 +33,6 @@ if __name__=='__main__':
         '%BB%93%20%E5%AE%9E%E6%88%98%E5%88%9D%E7%BA%A7%E5%A4%8D%E7%9B%98'
 
     html=load_(url)
+    
     with open('ydhtml.txt','w') as f:
         f.write(html)
